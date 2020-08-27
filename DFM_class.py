@@ -26,6 +26,7 @@ class DFM():
         self.lag=None
         self.pca_loading=None
         self.pca_factor=None
+        self.pca_factor_var=None
         self.pca_common=None
         self.pca_var_param=None
         self.pca_obs_res_cov=None
@@ -84,7 +85,7 @@ class DFM():
             self.lag=max(results.k_ar,1)
              #save dynamic matrix
             self.pca_var_param=results.coefs
-
+            self.pca_factor_var=results
             #calculate factor residue and its covariance matrix
             factor_resid=results.resid  #(n_time-lag,n_factor)
             self.pca_factor_res_cov=np.cov(factor_resid.T)
@@ -93,7 +94,8 @@ class DFM():
             #model=arima(self.pca_factor)
             #results=model.fit()
         
-        
+    def pca_factor_forecast(self,steps):
+        return self.pca_factor_var.forecast(self.pca_factor.T[-self.lag:], steps).T
        
     
     def pairwise_covariance(self, smoothed_state_covariances,kalman_smoothing_gain):

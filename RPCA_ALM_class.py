@@ -65,7 +65,7 @@ class R_pca:
         self.L = Lk
         self.S = Sk
         return Lk, Sk
-    
+
     def plot_fit(self, size=None, tol=0.1, axis_on=True):
 
         n, d = self.D.shape
@@ -92,7 +92,7 @@ class R_pca:
             if not axis_on:
                 plt.axis('off')
 
-# generate low rank synthetic data
+"""# generate low rank synthetic data
 N = 100
 num_groups = 3
 num_values_per_group = 40
@@ -105,7 +105,7 @@ for k in range(num_groups):
 
 D = np.hstack(Ds)
 
-# decimate 20% of data 
+# decimate 20% of data
 n1, n2 = D.shape
 S = np.random.rand(n1, n2)
 D[S < 0.2] = 0
@@ -118,7 +118,4 @@ L, S = rpca.fit(max_iter=10000, iter_print=100)
 rpca.plot_fit()
 plt.show()
 # In[ ]:
-
-
-
-
+"""
