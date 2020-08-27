@@ -233,6 +233,11 @@ class DFM():
                             predicted_observation_covariance[np.newaxis, :, :])
         return np.sum(loglikelihoods)
 
+    def stacked_forecast(self,step):
+        res=self.stacked_var_param@self.stacked_factor[:,-1]
+        for i in range(1,step):
+            res.append(self.stacked_var_param@res[-1])
+        return np.array(res)
 
 # In[ ]:
 
